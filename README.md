@@ -1,6 +1,6 @@
-﻿# Shivang Portfolio
+# Shivang Portfolio
 
-A standalone portfolio built with HTML, CSS, and vanilla JavaScript. It has no framework build step or backend. The animated accretion background uses WebGL with a CSS glow fallback.
+A standalone portfolio built with HTML, CSS, and vanilla JavaScript. It has no framework build step or backend. The background features an interactive 3D dot-matrix globe (Originkit GlobeStudy) with landmass decoding, rotational physics, dynamic typography, mouse spotlight glow, and drag/click pin interaction.
 
 ## Run locally
 

@@ -23,10 +23,12 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .skip-link { position: fixed; z-index: 100; top: 12px; left: 12px; transform: translateY(-160%); border-radius: 3px; padding: 12px 16px; background: var(--accent); color: #111; }
 .skip-link:focus { transform: translateY(0); }
 
-.accretion-canvas { position: fixed; z-index: 0; inset: 0; width: 100%; height: 100%; pointer-events: none; background: #050505; }
-.accretion-canvas.no-webgl { background: radial-gradient(ellipse at 54% 30%, rgba(255,95,0,.36), rgba(255,95,0,.08) 22%, #050505 62%); }
-.backdrop-overlay { position: fixed; z-index: 1; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 62% 20%, rgba(255,95,0,.08), transparent 38%), linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.72) 62%, #050505); }
-.cursor-glow { position: fixed; z-index: 20; top: 0; left: 0; width: 250px; height: 250px; border-radius: 50%; pointer-events: none; opacity: 0; background: radial-gradient(circle, rgba(255,95,0,.14), rgba(255,95,0,.035) 35%, transparent 70%); filter: blur(18px); transform: translate(-50%,-50%); transition: opacity .2s ease; }
+.globe-canvas,
+.accretion-canvas { position: fixed; z-index: 0; inset: 0; width: 100%; height: 100%; pointer-events: none; background: #000000; display: block; }
+.globe-canvas.no-webgl,
+.accretion-canvas.no-webgl { background: radial-gradient(ellipse at 50% 50%, rgba(255,26,47,.28), rgba(255,26,47,.06) 35%, #050505 70%); }
+.backdrop-overlay { position: fixed; z-index: 1; inset: 0; pointer-events: none; background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 25%, rgba(0,0,0,.32) 70%, rgba(5,5,5,.75) 100%); }
+.cursor-glow { position: fixed; z-index: 20; top: 0; left: 0; width: 260px; height: 260px; border-radius: 50%; pointer-events: none; opacity: 0; background: radial-gradient(circle, rgba(255,26,47,.16), rgba(255,26,47,.04) 35%, transparent 70%); filter: blur(20px); transform: translate(-50%,-50%); transition: opacity .2s ease; }
 .cursor-glow.visible { opacity: 1; }
 .site-header, main, .site-footer { position: relative; z-index: 2; }
 .site-header { position: sticky; top: 0; z-index: 30; border-bottom: 1px solid rgba(255,255,255,.08); background: rgba(5,5,5,.64); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
@@ -318,17 +320,43 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .subhead-icon { font-size: 18px; line-height: 1; }
 .subhead-count { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #ff9d66; padding: 4px 11px; border-radius: 999px; background: rgba(255,95,0,.08); border: 1px solid rgba(255,95,0,.26); white-space: nowrap; }
 
-/* Area 1: Professional Certifications Grid */
+/* Area 1: Professional Certifications — Originkit Smooth Scroll Slider */
+.certs-toolbar { display: inline-flex; align-items: center; gap: 8px; }
+.certs-view-toggle-group { display: inline-flex; align-items: center; padding: 2px; border-radius: 999px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); margin-right: 4px; }
+.certs-view-toggle { padding: 4px 11px; border-radius: 999px; background: transparent; border: none; color: #a0a0a5; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; line-height: 1; }
+.certs-view-toggle:hover { color: #fff; }
+.certs-view-toggle.is-active { background: rgba(255, 95, 0, 0.22); color: #ffcaa4; border: 1px solid rgba(255, 95, 0, 0.4); }
+
 .certs-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
 .cert-filter-pill { padding: 6px 15px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: .06em; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); color: #b0b0b8; cursor: pointer; transition: all .2s ease; }
 .cert-filter-pill:hover { border-color: rgba(255,95,0,.4); color: #fff; background: rgba(255,95,0,.08); }
 .cert-filter-pill.is-active { background: rgba(255,95,0,.14); border-color: #ff5f00; color: #ffcaa4; box-shadow: 0 0 14px rgba(255,95,0,.2); }
-.cert-card.is-hidden { display: none !important; }
+.cert-card.is-hidden, .certs-grid.is-hidden, .smooth-slider-wrapper.is-hidden { display: none !important; }
 .cert-view-btn { background: none; border: none; color: #ff9a61; font-size: 11px; font-weight: 600; cursor: pointer; padding: 2px 0; transition: color .2s, transform .2s; }
 .cert-view-btn:hover { color: #fff; transform: translateX(2px); }
 
+/* Smooth Scroll Slider Container */
+.smooth-slider-wrapper { position: relative; width: 100%; margin-top: 10px; margin-bottom: 28px; }
+.smooth-slider-container { position: relative; width: 100%; height: 530px; overflow: hidden; border-radius: 20px; background: radial-gradient(ellipse at 50% 50%, rgba(255, 26, 47, 0.05) 0%, rgba(16, 16, 20, 0.55) 45%, rgba(6, 6, 8, 0.94) 100%); border: 1px solid rgba(255, 255, 255, 0.09); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 24px 60px rgba(0, 0, 0, 0.45); cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%); mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%); outline: none; }
+.smooth-slider-container:focus-visible { border-color: rgba(255, 95, 0, 0.7); }
+.smooth-slider-container.is-dragging { cursor: grabbing; }
+
+.smooth-slide-item { position: absolute; top: 50%; left: 0; width: 380px; height: 430px; border-radius: 18px; will-change: transform, filter; transform: translate3d(0, -50%, 0); display: flex; flex-direction: column; padding: 26px 24px; background: rgba(18, 18, 22, 0.9); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.12); box-shadow: 0 16px 45px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08); transition: border-color .28s ease, box-shadow .28s ease; pointer-events: auto; cursor: pointer; }
+.smooth-slide-item:hover { border-color: rgba(255, 95, 0, 0.65); box-shadow: 0 20px 50px rgba(255, 95, 0, 0.18), 0 0 28px rgba(255, 95, 0, 0.15); }
+
+.cert-skills-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; margin-bottom: 16px; }
+.cert-mini-chip { padding: 3px 8px; border-radius: 999px; font-size: 10px; font-weight: 500; color: #d0d0d5; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.09); white-space: nowrap; }
+
+.slider-hint { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 14px; color: #8d8d91; font-size: 11px; }
+.slider-hint .hint-hand-icon { color: #ff9a61; }
+
 .certs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 @media (min-width: 1440px) { .certs-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 768px) {
+  .smooth-slider-container { height: 490px; }
+  .smooth-slide-item { width: 310px; height: 400px; padding: 20px; }
+  .certs-view-toggle-group { display: none; }
+}
 
 .cert-card { display: flex; flex-direction: column; padding: 22px; border-radius: 5px; position: relative; transition: transform .28s cubic-bezier(.2,.8,.2,1), border-color .28s ease, box-shadow .28s ease; overflow: hidden; }
 .cert-card:hover { transform: translateY(-5px); border-color: rgba(255,95,0,.48); box-shadow: 0 22px 55px rgba(255,95,0,.11), 0 0 0 1px rgba(255,95,0,.14); }

@@ -15,12 +15,12 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261002_06" />
+  <link rel="stylesheet" href="styles.css?v=20261004_slider" />
 </head>
 
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <canvas class="accretion-canvas" id="accretion-canvas" aria-hidden="true"></canvas>
+  <canvas class="globe-canvas accretion-canvas" id="globe-canvas" aria-hidden="true"></canvas>
   <div class="backdrop-overlay" aria-hidden="true"></div>
   <div class="cursor-glow" aria-hidden="true"></div>
 
@@ -59,7 +59,7 @@
           <a class="button button-quiet" href="#contact">Contact</a>
         </div>
       </div>
-      <div class="hero-coordinate" aria-hidden="true"><span>01 / 07</span><span>Engineering with intent</span></div>
+      <div class="hero-coordinate" aria-hidden="true"><span>01 / 07</span><span>🌐 3D Interactive Globe &bull; Drag to rotate</span></div>
       <a class="scroll-cue" href="#metrics"><span class="scroll-line"></span> Scroll to explore</a>
     </section>
 
@@ -816,11 +816,19 @@
         </div>
       </div>
 
-      <!-- Area 1: Professional Certifications -->
-      <div class="credentials-area reveal">
+      <!-- Area 1: Professional Certifications — Originkit Smooth Scroll Slider -->
+      <div class="credentials-area reveal" id="certs-area">
         <div class="credentials-subheading">
           <h3><span class="subhead-icon" aria-hidden="true">📜</span> Professional Certifications &amp; Standards</h3>
-          <span class="subhead-count" id="certs-count">13 Certifications</span>
+          <div class="carousel-toolbar certs-toolbar">
+            <button class="carousel-btn" id="slider-prev" type="button" aria-label="Slide previous">‹</button>
+            <button class="carousel-btn" id="slider-next" type="button" aria-label="Slide next">›</button>
+            <div class="certs-view-toggle-group" role="group" aria-label="View format">
+              <button class="certs-view-toggle is-active" id="certs-view-slider" type="button" aria-label="Slider view">🎞️ Slider</button>
+              <button class="certs-view-toggle" id="certs-view-grid" type="button" aria-label="Grid view">⊞ Grid</button>
+            </div>
+            <span class="subhead-count" id="certs-count">13 Certifications</span>
+          </div>
         </div>
 
         <!-- Category Filter Pills for Certifications -->
@@ -837,7 +845,20 @@
             data-filter="governance">Service &amp; Leadership</button>
         </div>
 
-        <div class="certs-grid" id="certs-grid" aria-label="Professional Certifications">
+        <!-- Area 1 View: Originkit Smooth Scroll Slider -->
+        <div class="smooth-slider-wrapper" id="certs-slider-wrapper">
+          <div class="smooth-slider-container" id="certs-slider-container" tabindex="0" role="region"
+            aria-label="Smooth Scroll Certifications Slider">
+            <!-- Dynamically populated smooth scroll slides -->
+          </div>
+          <div class="slider-hint" aria-hidden="true">
+            <span class="hint-hand-icon">↔</span>
+            <span>Drag or scroll to slide &bull; Click card to view credential syllabus &amp; skills</span>
+          </div>
+        </div>
+
+        <!-- Area 1 View: Grid View (Toggleable) -->
+        <div class="certs-grid is-hidden" id="certs-grid" aria-label="Professional Certifications">
           <!-- Dynamically populated from data/certifications.js -->
         </div>
       </div>
@@ -1047,13 +1068,13 @@
 
   <footer class="site-footer shell"><a class="wordmark" href="#top">SHIVANG GUPTA</a>
     <p>DevOps &amp; Cloud Infrastructure &bull; Hyderabad &amp; Indore</p>
-    <p class="footer-build">Built with HTML, CSS &amp; WebGL</p><span>© <span id="year"></span> Shivang Gupta</span>
+    <p class="footer-build">Built with HTML, CSS &amp; Interactive 3D Globe</p><span>© <span id="year"></span> Shivang Gupta</span>
   </footer>
 
   <!-- Scripts with Cache-Buster Versioning for Infallible Execution -->
-  <script src="data/certifications.js?v=20261002_06"></script>
-  <script src="data/badges.js?v=20261002_06"></script>
-  <script src="script.js?v=20261002_06"></script>
+  <script src="data/certifications.js?v=20261004_slider"></script>
+  <script src="data/badges.js?v=20261004_slider"></script>
+  <script src="script.js?v=20261004_badgespeed"></script>
 </body>
 
 </html>
