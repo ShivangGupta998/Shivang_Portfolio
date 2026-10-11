@@ -12,15 +12,16 @@ export const EXPERIENCE_DATA = [
     type: "Full-time",
     summary: "Working on real-world consulting and engineering solutions focused on Data, Analytics, and AI-driven systems. Contributing to data projects, application development, and platform engineering initiatives while collaborating with industry-leading enterprise platforms.",
     highlights: [
-      "Contributing to data projects, application development, and platform engineering initiatives.",
-      "Collaborating with enterprise platforms including JFrog, IBM watsonx, and Mendix.",
-      "Driving DevOps adoption and continuous integration for AI-powered analytics pipelines."
+      "Architected and implemented DATAEKO IT Service Desk featuring FastAPI, React 19, Google Gemini AI copilot, and WebSockets.",
+      "Automated CI/CD pipelines with AWS CodeBuild, multi-stage Docker containerization, and Render PaaS deployment with PostgreSQL.",
+      "Integrated Slack bot automation for instant incident dispatching and built background SLA monitoring schedulers.",
+      "Collaborating across enterprise platforms including JFrog Artifactory, IBM watsonx, and ClickHouse for cloud data workloads."
     ],
     workingOn: {
       title: "What I'm working on",
-      description: "Architecting cloud-native delivery pipelines for AI and analytics workloads, integrating JFrog Artifactory for binary management, and orchestrating deployments for Mendix low-code applications alongside IBM watsonx AI services."
+      description: "Developing full-stack enterprise automation systems including the DATAEKO IT Service Desk with Google Gemini AI copilot, architecting cloud-native delivery pipelines for AI workloads, integrating JFrog Artifactory for binary management, and orchestrating multi-stage Docker deployments with PostgreSQL."
     },
-    technologies: ["DevOps", "Platform Engineering", "JFrog", "IBM watsonx", "Mendix", "Data & AI", "CI/CD"]
+    technologies: ["FastAPI", "React 19", "Gemini AI", "Docker", "AWS CodeBuild", "WebSockets", "Slack SDK", "PostgreSQL", "JFrog", "ClickHouse", "CI/CD"]
   },
   {
     id: "staragile",

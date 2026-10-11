@@ -115,20 +115,22 @@
       filter: 'insurance'
     },
     'data-ai': {
-      badge: 'ENTERPRISE AI & PLATFORM CONSULTING',
+      badge: 'ENTERPRISE AI & PLATFORM ENGINEERING',
       eyebrow: 'ACTIVE DOMAIN: DATA / ANALYTICS / AI',
-      title: 'Enterprise AI-Driven Systems & Platform Engineering',
+      title: 'DATAEKO IT Service Desk & AI Copilot Platform',
       meta: 'DATAEKO.AI Pvt Ltd • Hyderabad, Telangana',
-      desc: 'Working on real-world consulting and engineering solutions focused on Data, Analytics, and AI-driven systems. Contributing to data projects, application development, and platform engineering workflows while collaborating with industry platforms.',
+      desc: 'Architected and built a modern full-stack IT Service Desk application with Python 3.12 FastAPI and React 19, integrating Google Gemini AI copilot for automated ticket triage, real-time WebSocket notifications, Slack bot alerting, multi-stage Docker builds, and AWS CodeBuild CI/CD.',
       highlights: [
-        'Consulting on real-world engineering solutions focused on enterprise Data, Analytics, and AI-driven systems.',
-        'Contributing to core data projects, application development, and platform engineering workflows.',
-        'Collaborating across industry-leading platforms including JFrog Artifactory, IBM watsonx AI, and ClickHouse.'
+        'Engineered an intelligent IT Service Desk Copilot using Google Gemini AI (@google/genai) with role-based routing (Admin, Manager, Employee) and action chips.',
+        'Implemented bidirectional live push notifications over native FastAPI WebSockets (/ws/notifications/{user_id}) and connection manager.',
+        'Integrated Slack Bot (slack_sdk) automation to dispatch instant notifications to IT engineering channels upon ticket creation or status shifts.',
+        'Built automated SLA monitoring scheduler and auto-assignment engine to prevent SLA breaches and streamline resolution workflows.',
+        'Designed multi-stage Docker containers and configured automated AWS CodeBuild CI/CD pipelines with Render PaaS infrastructure.'
       ],
-      chips: ['JFrog Artifactory', 'IBM watsonx', 'ClickHouse', 'Platform Engineering', 'AI Systems'],
-      projectId: null,
-      projectBtnText: 'View DATAEKO.AI Experience Details',
-      filter: 'experience'
+      chips: ['FastAPI', 'React 19', 'TypeScript', 'Gemini AI', 'WebSockets', 'Slack SDK', 'Docker', 'AWS CodeBuild', 'PostgreSQL', 'Render PaaS'],
+      projectId: 'dataeko',
+      projectBtnText: 'Open DATAEKO Service Desk Details',
+      filter: 'ai'
     }
   };
 
@@ -137,17 +139,18 @@
       roleBadge: 'PLATFORM & AI ENGINEERING',
       title: 'DevOps Engineer',
       company: 'DATAEKO.AI Pvt Ltd • Hyderabad, Telangana',
-      period: '',
+      period: 'April 2026 – Current',
       bullets: [
-        'Working on real-world consulting and engineering solutions focused on Data, Analytics, and AI-driven systems.',
-        'Contributing to enterprise data initiatives, application development, and platform engineering workflows.',
-        'Collaborating across industry-leading platforms including JFrog, IBM watsonx, and ClickHouse.'
+        'Architected and implemented DATAEKO IT Service Desk featuring FastAPI, React 19, Google Gemini AI copilot, and WebSockets.',
+        'Automated CI/CD pipelines with AWS CodeBuild, multi-stage Docker containerization, and Render PaaS deployment with PostgreSQL.',
+        'Integrated Slack bot automation for instant incident dispatching and built background SLA monitoring schedulers.',
+        'Collaborating across enterprise platforms including JFrog Artifactory, IBM watsonx, and ClickHouse for cloud data workloads.'
       ],
-      chips: ['JFrog', 'IBM watsonx', 'ClickHouse', 'Data & Analytics', 'Platform Engineering'],
+      chips: ['FastAPI', 'React 19', 'Gemini AI', 'Docker', 'AWS CodeBuild', 'WebSockets', 'Slack SDK', 'PostgreSQL', 'JFrog', 'ClickHouse'],
       metricIcon: '⚡',
-      metricText: 'Enterprise Data Consulting & AI Platform Workflows',
-      actionText: 'View Cloud & AI Projects',
-      filter: 'cloud'
+      metricText: 'Full-Stack IT Service Desk, Gemini AI Copilot & Cloud CI/CD',
+      actionText: 'View DATAEKO Project Details',
+      filter: 'ai'
     },
     staragile: {
       roleBadge: 'CLOUD & CONTAINER ORCHESTRATION',
@@ -202,8 +205,26 @@
       ],
       chips: ['Python', 'CAN Protocol', 'CANoe', 'Signal Automation', 'ECU Validation', 'Vector Informatik', 'COM API']
     },
-    garmin: {
+    dataeko: {
       num: '02',
+      tag: 'ENTERPRISE AI & DEVOPS',
+      title: 'DATAEKO – IT Service Desk & AI Copilot Platform',
+      meta: 'DevOps Engineer • DATAEKO.AI Pvt Ltd',
+      repoUrl: 'https://github.com/ShivangGupta998/DATAEKO_IT_SERVICE_DESK',
+      overview: 'Engineered a modern full-stack enterprise IT Service Desk application combining a Python 3.12 FastAPI backend with a React 19 & TypeScript frontend, integrated with Google Gemini AI for intelligent IT assistance, native WebSockets for real-time notification broadcasting, Slack bot event triggers, multi-stage Docker containerization, AWS CodeBuild CI/CD, and automated PaaS deployment on Render with PostgreSQL.',
+      highlights: [
+        'Integrated Google Gemini AI (@google/genai & gemini-3.8-flash) as an intelligent Service Desk Copilot with role-aware permissions (Admin, Manager, Employee), interactive action chips, and automated troubleshooting workflows.',
+        'Built bidirectional real-time push notification infrastructure using native FastAPI WebSockets (/ws/notifications/{user_id}) with connection pooling and broadcast routing.',
+        'Automated ticket alerting and incident escalations through Slack Bot integration (slack_sdk) connected to dedicated IT channels.',
+        'Designed background SLA monitoring scheduler and automated ticket triage engine to track resolution deadlines and prevent SLA breaches.',
+        'Developed comprehensive enterprise modules: full-lifecycle ticketing with audit trails, asset inventory tracking, software/VPN access requests, employee onboarding/offboarding workflows, and SLA analytics dashboards with Recharts.',
+        'Crafted multi-stage Dockerfile (node:22-alpine build + python:3.12-slim runtime) minimizing image size and optimizing production container security.',
+        'Configured automated AWS CodeBuild pipeline (buildspec.yml) and codified PaaS cloud infrastructure with PostgreSQL on Render (render.yaml).'
+      ],
+      chips: ['FastAPI', 'React 19', 'TypeScript', 'Google Gemini AI', 'WebSockets', 'Slack SDK', 'Docker', 'AWS CodeBuild', 'PostgreSQL', 'SQLAlchemy 2.0', 'Alembic', 'Tailwind CSS v4', 'Render PaaS', 'Recharts']
+    },
+    garmin: {
+      num: '03',
       tag: 'AUTOMOTIVE QA',
       title: 'Garmin – Infotainment System QA',
       meta: 'Clients: BMW, Mini Cooper, Rolls-Royce',
@@ -217,7 +238,7 @@
       chips: ['Jira', 'DOORS', 'PuTTY', 'Ediabas', 'CANoe', 'FAT Tool', 'IPC', 'CAN/Ethernet', 'E-SYS', 'Software Flashing', 'NVH Testing']
     },
     banking: {
-      num: '03',
+      num: '04',
       tag: 'BANKING DEVOPS',
       title: 'Banking Domain CI/CD & Orchestration',
       meta: 'DevOps Engineer • StarAgile Technologies',
@@ -231,7 +252,7 @@
       chips: ['Jenkins', 'Docker', 'Kubernetes', 'Grafana', 'Prometheus', 'High Availability', 'Git', 'Linux']
     },
     healthcare: {
-      num: '04',
+      num: '05',
       tag: 'HEALTHCARE CLOUD',
       title: 'Healthcare Infrastructure as Code (IaC)',
       meta: 'DevOps Engineer • StarAgile Technologies',
@@ -245,7 +266,7 @@
       chips: ['AWS', 'Terraform', 'IaC', 'Docker', 'Kubernetes', 'Scalability', 'VPC', 'IAM', 'EC2']
     },
     insurance: {
-      num: '05',
+      num: '06',
       tag: 'INSURANCE CLOUD',
       title: 'Insurance Automated Provisioning & Monitoring',
       meta: 'DevOps Engineer • StarAgile Technologies',
@@ -303,7 +324,13 @@
     'Linux': { insight: 'Extensive hands-on command-line expertise across Ubuntu, Debian, RedHat, and embedded automotive Linux environments.', filter: 'devops' },
     'Python': { insight: 'Engineered custom CAN automation scripts and testing tools, cutting execution workload by 88%.', filter: 'automation' },
     'Windows': { insight: 'Client environment expertise for vehicle diagnostic suites, test execution, and corporate tooling.', filter: 'devops' },
-    'Windows Server': { insight: 'Enterprise server management, active directory integration, and test harness execution environments.', filter: 'devops' }
+    'Windows Server': { insight: 'Enterprise server management, active directory integration, and test harness execution environments.', filter: 'devops' },
+    'FastAPI': { insight: 'Built high-performance async REST APIs and real-time WebSocket notification channels in DATAEKO IT Service Desk.', filter: 'ai' },
+    'React': { insight: 'Engineered modern React 19 + TypeScript single-page application with Tailwind CSS v4 in DATAEKO IT Service Desk.', filter: 'ai' },
+    'WebSockets': { insight: 'Implemented native FastAPI WebSockets for real-time live notification broadcasting in DATAEKO IT Service Desk.', filter: 'ai' },
+    'Slack SDK': { insight: 'Automated ticket alerts and IT incident notifications via Slack Bot integration in DATAEKO IT Service Desk.', filter: 'devops' },
+    'AWS CodeBuild': { insight: 'Configured automated CI pipeline stages for dependency installation, testing, and production builds in AWS CodeBuild.', filter: 'devops' },
+    'Gemini AI': { insight: 'Integrated Google Gemini AI Copilot for context-aware IT ticket triage, troubleshooting, and navigation.', filter: 'ai' }
   };
 
   const TOPIC_TEMPLATES = {
@@ -475,6 +502,16 @@
       chipsNode.innerHTML = data.chips.map(c => `<span>${escapeHtml(c)}</span>`).join('');
     }
 
+    const repoBtn = document.getElementById('modal-repo-btn');
+    if (repoBtn) {
+      if (data.repoUrl) {
+        repoBtn.href = data.repoUrl;
+        repoBtn.style.display = 'inline-flex';
+      } else {
+        repoBtn.style.display = 'none';
+      }
+    }
+
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
@@ -514,6 +551,20 @@
     if (chipsNode) {
       const skillsList = Array.isArray(cert.skills) ? cert.skills : [cert.category];
       chipsNode.innerHTML = skillsList.map(s => `<span>${escapeHtml(s)}</span>`).join('');
+    }
+
+    const verifyBtn = document.getElementById('modal-cert-verify-btn');
+    if (verifyBtn) {
+      if (cert.credentialUrl) {
+        verifyBtn.href = cert.credentialUrl;
+        verifyBtn.innerHTML = `Verify Credential on Credly <span aria-hidden="true">&rarr;</span>`;
+      } else if (cert.pdfUrl) {
+        verifyBtn.href = cert.pdfUrl;
+        verifyBtn.innerHTML = `View Certificate (PDF) <span aria-hidden="true">&rarr;</span>`;
+      } else {
+        verifyBtn.href = 'https://www.credly.com/users/shivang-gupta.4993dce2';
+        verifyBtn.innerHTML = `View All Credentials on Credly <span aria-hidden="true">&rarr;</span>`;
+      }
     }
 
     modal.classList.add('is-open');
@@ -1308,29 +1359,29 @@
     let isPlaying = !isReducedMotion();
     const dragState = { active: false, startX: 0, lastX: 0, moved: 0 };
 
-    let imageWidth = 301;
-    let imageHeight = 460;
-    let spacing = 1;
-    let radius = 533;
-    let perspective = 3000;
+    let imageWidth = 330;
+    let imageHeight = 550;
+    let spacing = 1.05;
+    let radius = 600;
+    let perspective = 3200;
 
     function updateConfig() {
       const w = window.innerWidth;
       if (w < 480) {
-        imageWidth = 195;
-        imageHeight = 300;
-        spacing = 0.8;
-        perspective = 1500;
+        imageWidth = 220;
+        imageHeight = 410;
+        spacing = 0.85;
+        perspective = 1600;
       } else if (w < 850) {
-        imageWidth = 240;
-        imageHeight = 370;
-        spacing = 0.9;
-        perspective = 2200;
+        imageWidth = 275;
+        imageHeight = 480;
+        spacing = 0.95;
+        perspective = 2400;
       } else {
-        imageWidth = 301;
-        imageHeight = 460;
-        spacing = 1;
-        perspective = 3000;
+        imageWidth = 330;
+        imageHeight = 550;
+        spacing = 1.05;
+        perspective = 3200;
       }
 
       const factor = 1 + spacing * 0.15;
@@ -1350,6 +1401,23 @@
 
     function applyTransform() {
       ring.style.transform = `translateZ(${-radius}px) rotateY(${rotY}deg)`;
+
+      const items = ring.querySelectorAll('.round-carousel-item');
+      items.forEach((item, i) => {
+        const itemAngle = ((i * angle + rotY) % 360 + 360) % 360;
+        const normAngle = itemAngle > 180 ? itemAngle - 360 : itemAngle;
+        const rad = (normAngle * Math.PI) / 180;
+        const cosVal = Math.cos(rad);
+
+        // Visible forward-facing cards receive clicks; back/side cards cannot steal pointer events
+        if (cosVal > 0.15) {
+          item.style.pointerEvents = 'auto';
+          item.style.zIndex = String(Math.round(100 * cosVal));
+        } else {
+          item.style.pointerEvents = 'none';
+          item.style.zIndex = '1';
+        }
+      });
     }
 
     ring.innerHTML = '';
@@ -1358,7 +1426,8 @@
       item.className = 'round-carousel-item';
       item.dataset.index = String(index);
 
-      const skillsList = Array.isArray(badge.skills) ? badge.skills.slice(0, 3) : [];
+      const targetUrl = badge.credentialUrl || 'https://www.credly.com/users/shivang-gupta.4993dce2';
+      const skillsList = Array.isArray(badge.skills) ? badge.skills.slice(0, 4) : [];
       const skillsHtml = skillsList.length > 0
         ? `<div class="badge-skills" aria-label="Skills covered">
             ${skillsList.map((s) => `<span>${escapeHtml(s)}</span>`).join('')}
@@ -1373,13 +1442,13 @@
               ${escapeHtml(badge.issuer)}
             </span>
           </div>
-          <div class="badge-visual-link">
+          <a class="badge-visual-link badge-card-link" href="${escapeHtml(targetUrl)}" target="_blank" rel="noopener noreferrer" title="Verify ${escapeHtml(badge.name)} on Credly">
             <div class="badge-visual-glow" aria-hidden="true"></div>
-            <img class="badge-image" src="${escapeHtml(badge.image)}" alt="${escapeHtml(badge.name)} badge icon" loading="lazy" width="104" height="104" />
-          </div>
+            <img class="badge-image" src="${escapeHtml(badge.image)}" ${badge.localImage ? `onerror="this.onerror=null;this.src='${escapeHtml(badge.localImage)}';"` : ''} alt="${escapeHtml(badge.name)} badge icon" loading="lazy" width="108" height="108" />
+          </a>
           <div class="badge-content">
             <h4 class="badge-title">
-              <a class="badge-card-link" href="${escapeHtml(badge.credentialUrl)}" target="_blank" rel="noopener noreferrer">
+              <a class="badge-card-link" href="${escapeHtml(targetUrl)}" target="_blank" rel="noopener noreferrer">
                 ${escapeHtml(badge.name)}
               </a>
             </h4>
@@ -1388,7 +1457,7 @@
             ${skillsHtml}
           </div>
           <div class="badge-action">
-            <a class="badge-btn badge-card-link" href="${escapeHtml(badge.credentialUrl)}" target="_blank" rel="noopener noreferrer">
+            <a class="badge-btn badge-card-link" href="${escapeHtml(targetUrl)}" target="_blank" rel="noopener noreferrer">
               <span>Verify Credential</span>
               <span class="badge-btn-arrow" aria-hidden="true">↗</span>
             </a>
@@ -1400,9 +1469,36 @@
         </div>
       `;
 
+      // Pause rotation on hover so the card remains completely still for effortless clicking
+      item.addEventListener('mouseenter', () => { isHovered = true; }, { passive: true });
+      item.addEventListener('mouseleave', () => { isHovered = false; }, { passive: true });
+
+      // Direct, infallible link click navigation to Credly
+      const linkElements = item.querySelectorAll('.badge-card-link, .badge-btn');
+      linkElements.forEach((btn) => {
+        btn.addEventListener('pointerdown', (ev) => {
+          ev.stopPropagation();
+        });
+        btn.addEventListener('mousedown', (ev) => {
+          ev.stopPropagation();
+        });
+        btn.addEventListener('click', (ev) => {
+          ev.stopPropagation();
+          const destUrl = btn.getAttribute('href') || targetUrl;
+          if (destUrl) {
+            try {
+              const opened = window.open(destUrl, '_blank');
+              if (opened) {
+                ev.preventDefault();
+              }
+            } catch (_) {}
+          }
+        });
+      });
+
       item.addEventListener('click', (e) => {
         if (dragState.moved > 8) return;
-        if (e.target.closest('.badge-card-link')) return;
+        if (e.target.closest('.badge-card-link') || e.target.closest('.badge-btn') || e.target.closest('a')) return;
         rotateToCard(index);
       });
 
@@ -1475,6 +1571,9 @@
 
     scene.addEventListener('pointerdown', (e) => {
       if (e.button !== 0 && e.pointerType === 'mouse') return;
+      if (e.target.closest('a') || e.target.closest('.badge-card-link') || e.target.closest('.badge-btn')) {
+        return;
+      }
       try { scene.setPointerCapture?.(e.pointerId); } catch (_) {}
       dragState.active = true;
       dragState.startX = e.clientX;

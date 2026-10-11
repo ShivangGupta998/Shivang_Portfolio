@@ -133,6 +133,30 @@ const CERTIFICATIONS_DATA = [
     badgeIcon: "💡",
     skills: ["Innovation", "Rapid Prototyping", "Collaborative Problem Solving", "Agile Ideation"],
     description: "Honored for collaborative problem solving, rapid engineering ideation, and delivering innovative technology solutions under pressure."
+  },
+  {
+    id: "ibm-verify-sales",
+    name: "Verify Sales Foundation",
+    issuer: "IBM",
+    category: "Security & Identity",
+    filterCategory: "governance",
+    badgeIcon: "🔐",
+    skills: ["IBM Verify", "Identity & Access Management", "IAM", "Cloud Security", "SaaS Security", "Trusted Advisor"],
+    description: "IBM verified certification covering identity and access security market dynamics, cloud IAM architecture, single sign-on (SSO), multi-factor authentication (MFA), and zero-trust security advisory.",
+    credentialUrl: "https://www.credly.com/badges/9d544585-bee2-43a2-b8f4-925aa75b5ea8",
+    pdfUrl: "assets/credentials/ibm-verify-sales-foundation-certificate.pdf"
+  },
+  {
+    id: "ibm-guardium-security",
+    name: "Guardium Data Security Center Sales Foundation",
+    issuer: "IBM",
+    category: "Data Security & Compliance",
+    filterCategory: "governance",
+    badgeIcon: "🛡️",
+    skills: ["IBM Guardium", "Data Security", "Compliance & Auditing", "Data Protection", "DSPM", "Risk Mitigation"],
+    description: "IBM verified certification in enterprise data security posture management (DSPM), compliance auditing, centralized hybrid-cloud data protection, and risk governance with IBM Guardium.",
+    credentialUrl: "https://www.credly.com/badges/58d40841-8b81-41b2-a74a-5e80e7c7ff31",
+    pdfUrl: "assets/credentials/ibm-guardium-sales-foundation-certificate.pdf"
   }
 ];
 

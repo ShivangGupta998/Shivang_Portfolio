@@ -6,6 +6,46 @@
 
 const BADGES_DATA = [
   {
+    "id": "9d544585-bee2-43a2-b8f4-925aa75b5ea8",
+    "name": "Verify Sales Foundation",
+    "issuer": "IBM",
+    "image": "https://images.credly.com/images/8b07d344-03e8-411e-bc1c-e0ee2e18156d/blob",
+    "localImage": "assets/credentials/ibm-verify-sales-foundation-badge.png",
+    "issueDate": "October 2026",
+    "issuedAtDate": "2026-10-08",
+    "credentialUrl": "https://www.credly.com/badges/9d544585-bee2-43a2-b8f4-925aa75b5ea8",
+    "description": "The badge earner understands the identity and access security market opportunity and the challenges customers face as they progress through digital transformation. They can describe how Verify (SaaS) can bring value to clients, solve business needs in their AI/Cloud journey, the Consumer Identity and Workforce Identity landscape, the challenges in the market, what Verify (SaaS) is, and how it can play a vital role in helping clients to solve business challenges.",
+    "skills": [
+      "IBM Verify",
+      "Identity and Access Management",
+      "IAM",
+      "Cloud Security",
+      "SaaS Security",
+      "Technology Sales",
+      "Trusted Advisor"
+    ]
+  },
+  {
+    "id": "58d40841-8b81-41b2-a74a-5e80e7c7ff31",
+    "name": "Guardium Data Security Center Sales Foundation",
+    "issuer": "IBM",
+    "image": "https://images.credly.com/images/7181f77c-a9c6-4f94-b375-91075d305d94/twitter_thumb_201604_Guardium_20Data_20Security_20Center_20Sales_20Foundation.png",
+    "localImage": "assets/credentials/ibm-guardium-sales-foundation-badge.png",
+    "issueDate": "October 2026",
+    "issuedAtDate": "2026-10-07",
+    "credentialUrl": "https://www.credly.com/badges/58d40841-8b81-41b2-a74a-5e80e7c7ff31",
+    "description": "The badge earner can describe how IBM Guardium Data Security Center can bring value to clients across on-premise and cloud environments. They will be able to engage clients and prospects in a conversation about what's happening in the market, the challenges clients face, and how Guardium Data Security Center can play a vital and differentiating role in solving their data security challenges.",
+    "skills": [
+      "IBM Guardium",
+      "Data Security",
+      "Data Protection",
+      "Compliance & Auditing",
+      "DSPM",
+      "Technology Sales",
+      "Trusted Advisor"
+    ]
+  },
+  {
     "id": "a48abb44-fc46-466c-9a65-4882b17ebdd8",
     "name": "ClickHouse Database Professional",
     "issuer": "ClickHouse",

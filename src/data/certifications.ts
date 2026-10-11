@@ -106,6 +106,22 @@ export const CERTIFICATIONS_DATA = [
     category: "Innovation",
     badgeIcon: "💡",
     description: "Honored for collaborative problem solving, rapid engineering ideation, and delivering innovative technology solutions under pressure."
+  },
+  {
+    id: "ibm-verify-sales",
+    name: "Verify Sales Foundation",
+    issuer: "IBM",
+    category: "Security & Identity",
+    badgeIcon: "🔐",
+    description: "IBM verified certification covering identity and access security market dynamics, cloud IAM architecture, single sign-on (SSO), multi-factor authentication (MFA), and zero-trust security advisory."
+  },
+  {
+    id: "ibm-guardium-security",
+    name: "Guardium Data Security Center Sales Foundation",
+    issuer: "IBM",
+    category: "Data Security & Compliance",
+    badgeIcon: "🛡️",
+    description: "IBM verified certification in enterprise data security posture management (DSPM), compliance auditing, centralized hybrid-cloud data protection, and risk governance with IBM Guardium."
   }
 ];
 

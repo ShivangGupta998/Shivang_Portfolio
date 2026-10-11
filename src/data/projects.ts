@@ -31,6 +31,39 @@ export const PROJECTS_DATA = [
     tools: ["Python", "CAN Protocol", "CANoe", "Database Signals", "Automation Testing", "ECU Validation"]
   },
   {
+    id: "dataeko-desk",
+    name: "DATAEKO IT Service Desk & AI Copilot Platform",
+    shortName: "DATAEKO IT Service Desk",
+    category: "dataeko",
+    domain: "Enterprise Platform / AI",
+    tags: ["DEVOPS", "CLOUD", "AI", "AUTOMATION", "FULLSTACK"],
+    role: "DevOps Engineer",
+    period: "April 2026 – Current",
+    company: "DATAEKO.AI Pvt Ltd",
+    repoUrl: "https://github.com/ShivangGupta998/DATAEKO_IT_SERVICE_DESK",
+    isFeatured: true,
+    description: "Engineered a modern full-stack enterprise IT Service Desk application combining a Python 3.12 FastAPI backend with a React 19 & TypeScript frontend, integrated with Google Gemini AI for intelligent IT assistance, native WebSockets for real-time notification broadcasting, Slack bot event triggers, multi-stage Docker containerization, AWS CodeBuild CI/CD, and automated PaaS deployment on Render with PostgreSQL.",
+    pipeline: [
+      { step: "Frontend", tool: "React 19 & Tailwind v4" },
+      { step: "Backend", tool: "FastAPI & Python 3.12" },
+      { step: "AI Copilot", tool: "Google Gemini GenAI" },
+      { step: "Alerting", tool: "Slack SDK & WebSockets" },
+      { step: "CI/CD", tool: "Docker & AWS CodeBuild" },
+      { step: "Cloud PaaS", tool: "Render & PostgreSQL" }
+    ],
+    responsibilities: [
+      "Integrated Google Gemini AI (@google/genai & gemini-3.8-flash) as an intelligent Service Desk Copilot with role-aware permissions (Admin, Manager, Employee), interactive action chips, and automated troubleshooting workflows.",
+      "Built bidirectional real-time push notification infrastructure using native FastAPI WebSockets (/ws/notifications/{user_id}) with connection pooling and broadcast routing.",
+      "Automated ticket alerting and incident escalations through Slack Bot integration (slack_sdk) connected to dedicated IT channels.",
+      "Designed background SLA monitoring scheduler and automated ticket triage engine to track resolution deadlines and prevent SLA breaches.",
+      "Developed comprehensive enterprise modules: full-lifecycle ticketing with audit trails, asset inventory tracking, software/VPN access requests, employee onboarding/offboarding workflows, and SLA analytics dashboards with Recharts.",
+      "Crafted multi-stage Dockerfile (node:22-alpine build + python:3.12-slim runtime) minimizing image size and optimizing production container security.",
+      "Configured automated AWS CodeBuild pipeline (buildspec.yml) and codified PaaS cloud infrastructure with PostgreSQL on Render (render.yaml)."
+    ],
+    impact: "Production-ready full-stack enterprise IT platform with automated Slack triage, real-time WebSocket push updates, Gemini AI assistance, and containerized cloud deployment.",
+    tools: ["FastAPI", "React 19", "TypeScript", "Google Gemini AI", "WebSockets", "Slack SDK", "Docker", "AWS CodeBuild", "PostgreSQL", "SQLAlchemy 2.0", "Alembic", "Tailwind CSS v4", "Render PaaS", "Recharts"]
+  },
+  {
     id: "garmin-infotainment",
     name: "Garmin Automotive Infotainment Testing",
     shortName: "Garmin Infotainment QA",
