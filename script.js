@@ -334,7 +334,17 @@
     'Vault': { insight: 'Advanced secrets management, encryption as a service, dynamic credentials leasing, and zero-trust security automation with HashiCorp Vault.', filter: 'cloud' },
     'ClickHouse': { insight: 'Real-time analytical columnar database, sub-second queries, and petabyte-scale data warehousing.', filter: 'cloud' },
     'Observability': { insight: 'Full-stack telemetry with OpenTelemetry, Instana, and ClickHouse for metrics, logs, distributed tracing, and APM.', filter: 'devops' },
-    'API Connect': { insight: 'Enterprise API lifecycle management, secure gateway architecture, application integration, and hybrid-cloud connectivity.', filter: 'cloud' }
+    'API Connect': { insight: 'Enterprise API lifecycle management, secure gateway architecture, application integration, and hybrid-cloud connectivity.', filter: 'cloud' },
+    'IBM Verify': { insight: 'Enterprise identity & access management, modern authentication, SSO, and adaptive multi-factor authentication protocols.', filter: 'cloud' },
+    'IBM Guardium': { insight: 'Data security posture management (DSPM), real-time data compliance monitoring, and sensitive data discovery across databases.', filter: 'cloud' },
+    'Zero Trust': { insight: 'Architected least-privilege access, perimeter-less identity verification, and ephemeral secrets leasing with HashiCorp Vault.', filter: 'cloud' },
+    'ISO 26262': { insight: 'Automotive functional safety standard governing automotive safety integrity levels (ASIL) and ECU verification at Expleo.', filter: 'automotive' },
+    'OpenTelemetry': { insight: 'Standardized telemetry collection for distributed tracing, metrics, and application logs across microservices.', filter: 'devops' },
+    'PostgreSQL': { insight: 'Relational database management, relational indexing, constraints, and ACID transactions in DATAEKO IT Service Desk.', filter: 'ai' },
+    'SQLAlchemy': { insight: 'Python Object Relational Mapper (ORM) powering database abstraction, queries, and migrations in FastAPI applications.', filter: 'ai' },
+    'TypeScript': { insight: 'Type-safe JavaScript development delivering robust frontend logic and compile-time error prevention.', filter: 'ai' },
+    'JavaScript': { insight: 'Vanilla modern ECMAScript standard powering interactive UI behaviors, 3D Canvas rendering, and micro-animations.', filter: 'devops' },
+    'REST APIs': { insight: 'Designed and implemented structured RESTful endpoints with OpenAPI/Swagger specifications and JSON payload schemas.', filter: 'ai' }
   };
 
   const TOPIC_TEMPLATES = {
@@ -585,6 +595,36 @@
     }
   };
 
+  window.openCvModal = function() {
+    const modal = document.getElementById('cv-modal');
+    if (!modal) return;
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeCvModal = function() {
+    const modal = document.getElementById('cv-modal');
+    if (modal) {
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+  };
+
+  let toastTimer = null;
+  window.showToast = function(message) {
+    const toast = document.getElementById('toast-notification');
+    const toastMsg = document.getElementById('toast-message');
+    if (!toast) return;
+    if (toastMsg) toastMsg.textContent = message;
+    toast.classList.add('is-visible');
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('is-visible');
+    }, 3200);
+  };
+
   window.filterCertifications = function(filterCategory) {
     const f = (filterCategory || 'all').toLowerCase();
     const pills = document.querySelectorAll('.cert-filter-pill');
@@ -797,6 +837,30 @@
       window.closeProjectModal();
       return;
     }
+
+    // 17. CV Modal trigger buttons
+    if (e.target.closest('#hero-resume-btn')) {
+      e.preventDefault();
+      window.openCvModal();
+      return;
+    }
+
+    // 18. CV Modal close buttons
+    if (e.target.closest('#cv-modal-close-btn') || e.target.matches('#cv-modal-backdrop')) {
+      e.preventDefault();
+      window.closeCvModal();
+      return;
+    }
+
+    // 19. Email copy / toast triggers
+    const emailLink = e.target.closest('#cv-email-link, a[href^="mailto:"]');
+    if (emailLink) {
+      const email = 'shivanggupta998@gmail.com';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).catch(() => {});
+      }
+      window.showToast('Copied shivanggupta998@gmail.com to clipboard!');
+    }
   });
 
   // Keyboard accessibility (Escape key closes modals)
@@ -804,6 +868,7 @@
     if (e.key === 'Escape') {
       window.closeProjectModal();
       window.closeCertModal();
+      window.closeCvModal();
     }
   });
 
