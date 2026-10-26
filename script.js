@@ -976,6 +976,9 @@
     if (certsCount) certsCount.textContent = `${certs.length} Certifications`;
     if (badgesCount) badgesCount.textContent = `${badges.length} Verified Badges`;
 
+    const allPill = document.querySelector('.cert-filter-pill[data-filter="all"]');
+    if (allPill) allPill.textContent = `ALL (${certs.length})`;
+
     if (!certsGrid) return;
     certsGrid.innerHTML = '';
 
