@@ -122,9 +122,122 @@ export const CERTIFICATIONS_DATA = [
     category: "Data Security & Compliance",
     badgeIcon: "🛡️",
     description: "IBM verified certification in enterprise data security posture management (DSPM), compliance auditing, centralized hybrid-cloud data protection, and risk governance with IBM Guardium."
+  },
+  {
+    id: "ibm-terraform-practitioner",
+    name: "Terraform Practitioner Advanced",
+    issuer: "IBM",
+    category: "Cloud & Infrastructure as Code",
+    badgeIcon: "🏗️",
+    description: "Advanced engineering competency in HashiCorp Terraform deployment, multi-cloud infrastructure provisioning, state management, and enterprise architecture."
+  },
+  {
+    id: "ibm-vault-practitioner",
+    name: "Vault Practitioner Advanced",
+    issuer: "IBM",
+    category: "Cloud Security & Secrets Management",
+    badgeIcon: "🔒",
+    description: "Advanced practitioner mastery in enterprise HashiCorp Vault architecture, automated secret leasing, dynamic credentials, and encryption-as-a-service."
+  },
+  {
+    id: "ibm-verify-practitioner",
+    name: "Verify Practitioner Advanced",
+    issuer: "IBM",
+    category: "Identity & Access Management",
+    badgeIcon: "🔑",
+    description: "Advanced technical deployment and architecture of enterprise identity and access management (IAM), adaptive authentication, SSO, and secure workload migration."
+  },
+  {
+    id: "ibm-api-connect",
+    name: "API Connect Sales Foundation",
+    issuer: "IBM",
+    category: "API & Cloud Integration",
+    badgeIcon: "🔌",
+    description: "Comprehensive certification in full lifecycle API management, secure gateway architecture, application integration, and hybrid-cloud connectivity."
+  },
+  {
+    id: "clickhouse-db-pro",
+    name: "ClickHouse Database Professional",
+    issuer: "ClickHouse",
+    category: "Database & Analytics",
+    badgeIcon: "⚡",
+    description: "Verified professional certification in high-performance columnar data storage, real-time SQL analytical queries, table engine optimization, and distributed scaling."
+  },
+  {
+    id: "clickhouse-dw-pro",
+    name: "ClickHouse Data Warehousing Professional",
+    issuer: "ClickHouse",
+    category: "Data Warehousing & Architecture",
+    badgeIcon: "🏢",
+    description: "Advanced mastery in ingesting, structuring, and managing enterprise data warehouses with ClickHouse, continuous ingestion pipelines, data quality assurance, and RBAC governance."
+  },
+  {
+    id: "clickhouse-dw-assoc",
+    name: "ClickHouse Data Warehousing Associate",
+    issuer: "ClickHouse",
+    category: "Data Warehousing & Querying",
+    badgeIcon: "📦",
+    description: "Foundational mastery in ClickHouse architecture, primary keys, granules, parts, external data source querying, and ad-hoc analytical workloads."
+  },
+  {
+    id: "clickhouse-observability-pro",
+    name: "ClickHouse Observability Professional",
+    issuer: "ClickHouse",
+    category: "Observability & Monitoring",
+    badgeIcon: "📊",
+    description: "Advanced observability engineering utilizing ClickHouse and OpenTelemetry for hyper-scale log ingestion, distributed tracing, metric aggregation, and alerting."
+  },
+  {
+    id: "clickhouse-obs-assoc",
+    name: "ClickHouse Observability Associate",
+    issuer: "ClickHouse",
+    category: "Observability & OpenTelemetry",
+    badgeIcon: "🔍",
+    description: "Foundational understanding of observability architecture, ingesting logs, metrics, and application traces using ClickHouse, OpenTelemetry, and HyperDX."
+  },
+  {
+    id: "ibm-concert-sales",
+    name: "Concert Sales Foundation",
+    issuer: "IBM",
+    category: "AI-Driven Application Management",
+    badgeIcon: "🤖",
+    description: "Certified foundation in IBM Concert for AI-driven application management, full-lifecycle visibility, operational risk mitigation, and automated cloud advisory."
+  },
+  {
+    id: "ibm-instana-intermediate",
+    name: "Instana Intermediate",
+    issuer: "IBM",
+    category: "AIOps & Observability",
+    badgeIcon: "📈",
+    description: "Hands-on technical implementation of IBM Instana for automated full-stack application performance monitoring (APM), microservices discovery, and incident resolution."
+  },
+  {
+    id: "ibm-instana-sales",
+    name: "Instana Sales Foundation",
+    issuer: "IBM",
+    category: "AIOps & APM Foundation",
+    badgeIcon: "🎯",
+    description: "Foundational expertise in enterprise Application Performance Monitoring (APM), microservices observability, automated dependency mapping, and business impact analytics with IBM Instana."
+  },
+  {
+    id: "clickhouse-db-assoc",
+    name: "ClickHouse Database Associate",
+    issuer: "ClickHouse",
+    category: "Database & Cloud Pipelines",
+    badgeIcon: "💾",
+    description: "Foundational competency in ClickHouse DBMS architecture, table functions, automated ingestion via ClickPipes, and real-time analytical SQL query execution."
+  },
+  {
+    id: "clickhouse-partner-sales",
+    name: "ClickHouse Partner Sales Professional",
+    issuer: "ClickHouse",
+    category: "Database Solutions & Strategy",
+    badgeIcon: "🤝",
+    description: "Professional accreditation in evaluating real-time analytics architectures, ClickHouse positioning, solution differentiators, and enterprise cloud advisory."
   }
 ];
 
 if (typeof window !== "undefined") {
   (window as any).CERTIFICATIONS_DATA = CERTIFICATIONS_DATA;
 }
+

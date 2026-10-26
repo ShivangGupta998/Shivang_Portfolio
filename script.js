@@ -976,6 +976,9 @@
     if (certsCount) certsCount.textContent = `${certs.length} Certifications`;
     if (badgesCount) badgesCount.textContent = `${badges.length} Verified Badges`;
 
+    const allPill = document.querySelector('.cert-filter-pill[data-filter="all"]');
+    if (allPill) allPill.textContent = `ALL (${certs.length})`;
+
     if (!certsGrid) return;
     certsGrid.innerHTML = '';
 
@@ -1346,18 +1349,29 @@
 
     const count = badges.length;
     const angle = 360 / count;
-    const sensitivity = 4;
-    const speed = 1.8; // Reduced speed for a relaxed, graceful, readable rotation
-    const degPerSec = speed * 6; // 10.8 deg/sec (~33s full rotation)
+    const sensitivity = 3.6;
+    const speed = 1.7; // Relaxed, graceful, readable rotation speed
+    const degPerSec = speed * 6; // ~10.2 deg/sec (~35s full rotation)
     const innerDim = 6;
+
     let isHovered = false;
+    let hoverEase = 1.0; // 1.0 = full cruise speed, 0.0 = softly paused
 
     let rotY = 0;
     let targetRotY = null;
     let vel = 0;
-    let lastTime = Date.now();
+    let lastTime = 0;
     let isPlaying = !isReducedMotion();
-    const dragState = { active: false, startX: 0, lastX: 0, moved: 0 };
+    let cachedItems = [];
+
+    const dragState = {
+      active: false,
+      startX: 0,
+      lastX: 0,
+      lastTime: 0,
+      moved: 0,
+      recentVel: 0
+    };
 
     let imageWidth = 330;
     let imageHeight = 550;
@@ -1391,33 +1405,34 @@
       ring.style.width = `${imageWidth}px`;
       ring.style.height = `${imageHeight}px`;
 
-      const items = ring.querySelectorAll('.round-carousel-item');
-      items.forEach((item, i) => {
-        item.style.transform = `rotateY(${i * angle}deg) translateZ(${radius}px)`;
-      });
+      cachedItems = Array.from(ring.children);
+      for (let i = 0; i < cachedItems.length; i++) {
+        cachedItems[i].style.transform = `rotateY(${i * angle}deg) translate3d(0, 0, ${radius}px)`;
+      }
 
-      applyTransform();
+      applyTransform(true);
     }
 
-    function applyTransform() {
-      ring.style.transform = `translateZ(${-radius}px) rotateY(${rotY}deg)`;
+    function applyTransform(force = false) {
+      ring.style.transform = `translate3d(0, 0, ${-radius}px) rotateY(${rotY}deg)`;
 
-      const items = ring.querySelectorAll('.round-carousel-item');
-      items.forEach((item, i) => {
-        const itemAngle = ((i * angle + rotY) % 360 + 360) % 360;
+      const total = cachedItems.length;
+      if (!total) return;
+
+      const normRot = ((rotY % 360) + 360) % 360;
+
+      for (let i = 0; i < total; i++) {
+        const item = cachedItems[i];
+        const itemAngle = ((i * angle + normRot) % 360 + 360) % 360;
         const normAngle = itemAngle > 180 ? itemAngle - 360 : itemAngle;
-        const rad = (normAngle * Math.PI) / 180;
-        const cosVal = Math.cos(rad);
 
-        // Visible forward-facing cards receive clicks; back/side cards cannot steal pointer events
-        if (cosVal > 0.15) {
-          item.style.pointerEvents = 'auto';
-          item.style.zIndex = String(Math.round(100 * cosVal));
-        } else {
-          item.style.pointerEvents = 'none';
-          item.style.zIndex = '1';
+        // Front arc (|normAngle| < 78 deg) cards receive clicks; back/side cards cannot steal pointer events
+        const isFront = Math.abs(normAngle) < 78;
+        if (force || item._isFront !== isFront) {
+          item._isFront = isFront;
+          item.style.pointerEvents = isFront ? 'auto' : 'none';
         }
-      });
+      }
     }
 
     ring.innerHTML = '';
@@ -1469,9 +1484,9 @@
         </div>
       `;
 
-      // Pause rotation on hover so the card remains completely still for effortless clicking
-      item.addEventListener('mouseenter', () => { isHovered = true; }, { passive: true });
-      item.addEventListener('mouseleave', () => { isHovered = false; }, { passive: true });
+      // Gently ease rotation to a stop on hover so cards can be effortlessly inspected & clicked
+      item.addEventListener('pointerenter', () => { isHovered = true; }, { passive: true });
+      item.addEventListener('pointerleave', () => { isHovered = false; }, { passive: true });
 
       // Direct, infallible link click navigation to Credly
       const linkElements = item.querySelectorAll('.badge-card-link, .badge-btn');
@@ -1534,31 +1549,42 @@
 
     updateConfig();
 
-    function draw() {
-      const now = Date.now();
-      const dt = lastTime ? (now - lastTime) / 1000 : 0;
+    function draw(now) {
+      if (!lastTime) lastTime = now;
+      const rawDt = (now - lastTime) / 1000;
       lastTime = now;
-      const f = Math.min(dt, 0.1);
+      const dt = Math.min(Math.max(rawDt, 0.0005), 0.05);
 
-      if (!dragState.active) {
+      if (dragState.active) {
+        applyTransform();
+      } else {
         if (targetRotY !== null) {
+          // Critically damped spring towards target card with zero snap/jitter
           const diff = targetRotY - rotY;
-          if (Math.abs(diff) < 0.15) {
+          if (Math.abs(diff) < 0.015) {
             rotY = targetRotY;
             targetRotY = null;
             vel = 0;
           } else {
-            rotY += diff * 0.14;
+            rotY += diff * (1 - Math.exp(-8.5 * dt));
             vel = 0;
           }
-        } else if (Math.abs(vel) > 0.01) {
-          rotY += vel * f;
-          vel *= 0.94;
-        } else if (isPlaying && !isHovered) {
-          rotY += degPerSec * f;
+        } else if (Math.abs(vel) > 0.05) {
+          rotY += vel * dt;
+          vel *= Math.exp(-4.2 * dt);
+          if (Math.abs(vel) <= 0.05) vel = 0;
+        } else {
+          // Auto-rotation with exponential hover ease (smooth glide-to-stop & restart)
+          const targetHover = (isPlaying && !isHovered) ? 1.0 : 0.0;
+          hoverEase += (targetHover - hoverEase) * (1 - Math.exp(-6.5 * dt));
+
+          if (hoverEase > 0.001) {
+            rotY += degPerSec * hoverEase * dt;
+          }
         }
+
+        applyTransform();
       }
-      applyTransform();
 
       if (typeof window.requestAnimationFrame === 'function') {
         window.requestAnimationFrame(draw);
@@ -1575,10 +1601,13 @@
         return;
       }
       try { scene.setPointerCapture?.(e.pointerId); } catch (_) {}
+      scene.classList.add('is-dragging');
       dragState.active = true;
       dragState.startX = e.clientX;
       dragState.lastX = e.clientX;
+      dragState.lastTime = performance.now();
       dragState.moved = 0;
+      dragState.recentVel = 0;
       targetRotY = null;
       vel = 0;
     });
@@ -1586,23 +1615,29 @@
     scene.addEventListener('pointermove', (e) => {
       if (!dragState.active) return;
       const dx = e.clientX - dragState.lastX;
+      const now = performance.now();
+      const dtMove = Math.max((now - dragState.lastTime) / 1000, 0.001);
       dragState.lastX = e.clientX;
+      dragState.lastTime = now;
       dragState.moved += Math.abs(dx);
-      const k = 0.3 * sensitivity;
+
+      const k = 0.28 * sensitivity;
       rotY += dx * k;
-      vel = dx * k * 60;
-      applyTransform();
+
+      const instVel = (dx * k) / dtMove;
+      dragState.recentVel = dragState.recentVel * 0.35 + instVel * 0.65;
     });
 
     const endDrag = (e) => {
       if (dragState.active) {
         try { scene.releasePointerCapture?.(e.pointerId); } catch (_) {}
+        scene.classList.remove('is-dragging');
         dragState.active = false;
+        vel = clampN(dragState.recentVel, -450, 450);
       }
     };
     scene.addEventListener('pointerup', endDrag);
     scene.addEventListener('pointercancel', endDrag);
-    scene.addEventListener('pointerenter', () => { isHovered = true; }, { passive: true });
     scene.addEventListener('pointerleave', () => { isHovered = false; }, { passive: true });
 
     if (prevBtn) {
@@ -1845,7 +1880,7 @@
       const z1 = -y2 * view.st + z2 * view.ct;
       const x0 = x1 * view.cs + z1 * view.sn;
       const z0 = -x1 * view.sn + z1 * view.cs;
-      return { lat: Math.asin(clampN(y0, -1, 1)), lon: Math.atan2(z0, x0) };
+      return { lat: Math.asin(clampN(y0, -1, 1)), lon: Math.atan2(x0, z0) };
     };
 
     const ptr = {
@@ -1862,7 +1897,7 @@
     let raf = 0;
     let last = performance.now();
     let clock = 0;
-    let spin = 2.1;
+    let spin = 1.35;
     let vel = 0.16;
     let tilt = -0.36;
     let vtilt = 0;
@@ -1910,7 +1945,7 @@
       const fs = u * 0.0275 * Math.pow(zoom, 0.72) * v.glyphSize;
 
       if (ptr.dragging) {
-        const dspin = (ptr.dx * u) / R;
+        const dspin = (-ptr.dx * u) / R;
         const dtilt = (-ptr.dy * u) / R;
         ptr.dx = 0;
         ptr.dy = 0;
@@ -1922,7 +1957,7 @@
         vel += (clampN(dspin * inv, -9, 9) - vel) * k;
         vtilt += (clampN(dtilt * inv, -9, 9) - vtilt) * k;
       } else {
-        const idle = 0.16 * v.drift * (hv > 0 ? 0.28 : 1);
+        const idle = -0.16 * v.drift * (hv > 0 ? 0.28 : 1);
         vel += (idle - vel) * Math.min(1, (dt * sp) / 0.9);
         vtilt *= Math.exp(-dt * sp * 6.6);
         tilt = clampN(tilt + vtilt * dt * sp, -1.15, 1.15);
@@ -1968,9 +2003,9 @@
       for (let i = 0; i < nodes.length; i++) {
         const nd = nodes[i];
         const cl = Math.cos(nd.lat);
-        const x0 = cl * Math.cos(nd.lon);
+        const x0 = cl * Math.sin(nd.lon);
         const y0 = Math.sin(nd.lat);
-        const z0 = cl * Math.sin(nd.lon);
+        const z0 = cl * Math.cos(nd.lon);
         const x1 = x0 * cs - z0 * sn;
         const z1 = x0 * sn + z0 * cs;
         const y2 = y0 * ct - z1 * st;
@@ -1991,11 +2026,14 @@
           continue;
         }
 
-        const tx0 = -Math.sin(nd.lon);
-        const tz0 = Math.cos(nd.lon);
+        const tx0 = Math.cos(nd.lon);
+        const tz0 = -Math.sin(nd.lon);
         const tx1 = tx0 * cs - tz0 * sn;
         const tz1 = tx0 * sn + tz0 * cs;
-        const ang = Math.round(Math.atan2(tz1 * st, tx1) / QA) * QA;
+        let ang = Math.atan2(tz1 * st, tx1);
+        if (ang > Math.PI / 2) ang -= Math.PI;
+        else if (ang < -Math.PI / 2) ang += Math.PI;
+        ang = Math.round(ang / QA) * QA;
         const b = Math.min(7, Math.max(0, (Math.min(0.999, z2 + glow * 0.6) * 7.99) | 0));
         (land8[b] || (land8[b] = [])).push(px, py, ang, i);
       }
@@ -2036,9 +2074,9 @@
       for (let pi = 0; pi < pins.length; pi++) {
         const pn = pins[pi];
         const pcl = Math.cos(pn.lat);
-        const ax = pcl * Math.cos(pn.lon);
+        const ax = pcl * Math.sin(pn.lon);
         const ay = Math.sin(pn.lat);
-        const az = pcl * Math.sin(pn.lon);
+        const az = pcl * Math.cos(pn.lon);
         const bx1 = ax * cs - az * sn;
         const bz1 = ax * sn + az * cs;
         const by2 = ay * ct - bz1 * st;
