@@ -1848,7 +1848,7 @@
       const z1 = -y2 * view.st + z2 * view.ct;
       const x0 = x1 * view.cs + z1 * view.sn;
       const z0 = -x1 * view.sn + z1 * view.cs;
-      return { lat: Math.asin(clampN(y0, -1, 1)), lon: Math.atan2(z0, x0) };
+      return { lat: Math.asin(clampN(y0, -1, 1)), lon: Math.atan2(x0, z0) };
     };
 
     const ptr = {
@@ -1865,7 +1865,7 @@
     let raf = 0;
     let last = performance.now();
     let clock = 0;
-    let spin = 2.1;
+    let spin = 1.35;
     let vel = 0.16;
     let tilt = -0.36;
     let vtilt = 0;
@@ -1913,7 +1913,7 @@
       const fs = u * 0.0275 * Math.pow(zoom, 0.72) * v.glyphSize;
 
       if (ptr.dragging) {
-        const dspin = (ptr.dx * u) / R;
+        const dspin = (-ptr.dx * u) / R;
         const dtilt = (-ptr.dy * u) / R;
         ptr.dx = 0;
         ptr.dy = 0;
@@ -1925,7 +1925,7 @@
         vel += (clampN(dspin * inv, -9, 9) - vel) * k;
         vtilt += (clampN(dtilt * inv, -9, 9) - vtilt) * k;
       } else {
-        const idle = 0.16 * v.drift * (hv > 0 ? 0.28 : 1);
+        const idle = -0.16 * v.drift * (hv > 0 ? 0.28 : 1);
         vel += (idle - vel) * Math.min(1, (dt * sp) / 0.9);
         vtilt *= Math.exp(-dt * sp * 6.6);
         tilt = clampN(tilt + vtilt * dt * sp, -1.15, 1.15);
@@ -1971,9 +1971,9 @@
       for (let i = 0; i < nodes.length; i++) {
         const nd = nodes[i];
         const cl = Math.cos(nd.lat);
-        const x0 = cl * Math.cos(nd.lon);
+        const x0 = cl * Math.sin(nd.lon);
         const y0 = Math.sin(nd.lat);
-        const z0 = cl * Math.sin(nd.lon);
+        const z0 = cl * Math.cos(nd.lon);
         const x1 = x0 * cs - z0 * sn;
         const z1 = x0 * sn + z0 * cs;
         const y2 = y0 * ct - z1 * st;
@@ -1994,11 +1994,14 @@
           continue;
         }
 
-        const tx0 = -Math.sin(nd.lon);
-        const tz0 = Math.cos(nd.lon);
+        const tx0 = Math.cos(nd.lon);
+        const tz0 = -Math.sin(nd.lon);
         const tx1 = tx0 * cs - tz0 * sn;
         const tz1 = tx0 * sn + tz0 * cs;
-        const ang = Math.round(Math.atan2(tz1 * st, tx1) / QA) * QA;
+        let ang = Math.atan2(tz1 * st, tx1);
+        if (ang > Math.PI / 2) ang -= Math.PI;
+        else if (ang < -Math.PI / 2) ang += Math.PI;
+        ang = Math.round(ang / QA) * QA;
         const b = Math.min(7, Math.max(0, (Math.min(0.999, z2 + glow * 0.6) * 7.99) | 0));
         (land8[b] || (land8[b] = [])).push(px, py, ang, i);
       }
@@ -2039,9 +2042,9 @@
       for (let pi = 0; pi < pins.length; pi++) {
         const pn = pins[pi];
         const pcl = Math.cos(pn.lat);
-        const ax = pcl * Math.cos(pn.lon);
+        const ax = pcl * Math.sin(pn.lon);
         const ay = Math.sin(pn.lat);
-        const az = pcl * Math.sin(pn.lon);
+        const az = pcl * Math.cos(pn.lon);
         const bx1 = ax * cs - az * sn;
         const bz1 = ax * sn + az * cs;
         const by2 = ay * ct - bz1 * st;
