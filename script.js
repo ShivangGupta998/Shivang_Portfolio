@@ -1349,18 +1349,29 @@
 
     const count = badges.length;
     const angle = 360 / count;
-    const sensitivity = 4;
-    const speed = 1.8; // Reduced speed for a relaxed, graceful, readable rotation
-    const degPerSec = speed * 6; // 10.8 deg/sec (~33s full rotation)
+    const sensitivity = 3.6;
+    const speed = 1.7; // Relaxed, graceful, readable rotation speed
+    const degPerSec = speed * 6; // ~10.2 deg/sec (~35s full rotation)
     const innerDim = 6;
+
     let isHovered = false;
+    let hoverEase = 1.0; // 1.0 = full cruise speed, 0.0 = softly paused
 
     let rotY = 0;
     let targetRotY = null;
     let vel = 0;
-    let lastTime = Date.now();
+    let lastTime = 0;
     let isPlaying = !isReducedMotion();
-    const dragState = { active: false, startX: 0, lastX: 0, moved: 0 };
+    let cachedItems = [];
+
+    const dragState = {
+      active: false,
+      startX: 0,
+      lastX: 0,
+      lastTime: 0,
+      moved: 0,
+      recentVel: 0
+    };
 
     let imageWidth = 330;
     let imageHeight = 550;
@@ -1394,33 +1405,34 @@
       ring.style.width = `${imageWidth}px`;
       ring.style.height = `${imageHeight}px`;
 
-      const items = ring.querySelectorAll('.round-carousel-item');
-      items.forEach((item, i) => {
-        item.style.transform = `rotateY(${i * angle}deg) translateZ(${radius}px)`;
-      });
+      cachedItems = Array.from(ring.children);
+      for (let i = 0; i < cachedItems.length; i++) {
+        cachedItems[i].style.transform = `rotateY(${i * angle}deg) translate3d(0, 0, ${radius}px)`;
+      }
 
-      applyTransform();
+      applyTransform(true);
     }
 
-    function applyTransform() {
-      ring.style.transform = `translateZ(${-radius}px) rotateY(${rotY}deg)`;
+    function applyTransform(force = false) {
+      ring.style.transform = `translate3d(0, 0, ${-radius}px) rotateY(${rotY}deg)`;
 
-      const items = ring.querySelectorAll('.round-carousel-item');
-      items.forEach((item, i) => {
-        const itemAngle = ((i * angle + rotY) % 360 + 360) % 360;
+      const total = cachedItems.length;
+      if (!total) return;
+
+      const normRot = ((rotY % 360) + 360) % 360;
+
+      for (let i = 0; i < total; i++) {
+        const item = cachedItems[i];
+        const itemAngle = ((i * angle + normRot) % 360 + 360) % 360;
         const normAngle = itemAngle > 180 ? itemAngle - 360 : itemAngle;
-        const rad = (normAngle * Math.PI) / 180;
-        const cosVal = Math.cos(rad);
 
-        // Visible forward-facing cards receive clicks; back/side cards cannot steal pointer events
-        if (cosVal > 0.15) {
-          item.style.pointerEvents = 'auto';
-          item.style.zIndex = String(Math.round(100 * cosVal));
-        } else {
-          item.style.pointerEvents = 'none';
-          item.style.zIndex = '1';
+        // Front arc (|normAngle| < 78 deg) cards receive clicks; back/side cards cannot steal pointer events
+        const isFront = Math.abs(normAngle) < 78;
+        if (force || item._isFront !== isFront) {
+          item._isFront = isFront;
+          item.style.pointerEvents = isFront ? 'auto' : 'none';
         }
-      });
+      }
     }
 
     ring.innerHTML = '';
@@ -1472,9 +1484,9 @@
         </div>
       `;
 
-      // Pause rotation on hover so the card remains completely still for effortless clicking
-      item.addEventListener('mouseenter', () => { isHovered = true; }, { passive: true });
-      item.addEventListener('mouseleave', () => { isHovered = false; }, { passive: true });
+      // Gently ease rotation to a stop on hover so cards can be effortlessly inspected & clicked
+      item.addEventListener('pointerenter', () => { isHovered = true; }, { passive: true });
+      item.addEventListener('pointerleave', () => { isHovered = false; }, { passive: true });
 
       // Direct, infallible link click navigation to Credly
       const linkElements = item.querySelectorAll('.badge-card-link, .badge-btn');
@@ -1537,31 +1549,42 @@
 
     updateConfig();
 
-    function draw() {
-      const now = Date.now();
-      const dt = lastTime ? (now - lastTime) / 1000 : 0;
+    function draw(now) {
+      if (!lastTime) lastTime = now;
+      const rawDt = (now - lastTime) / 1000;
       lastTime = now;
-      const f = Math.min(dt, 0.1);
+      const dt = Math.min(Math.max(rawDt, 0.0005), 0.05);
 
-      if (!dragState.active) {
+      if (dragState.active) {
+        applyTransform();
+      } else {
         if (targetRotY !== null) {
+          // Critically damped spring towards target card with zero snap/jitter
           const diff = targetRotY - rotY;
-          if (Math.abs(diff) < 0.15) {
+          if (Math.abs(diff) < 0.015) {
             rotY = targetRotY;
             targetRotY = null;
             vel = 0;
           } else {
-            rotY += diff * 0.14;
+            rotY += diff * (1 - Math.exp(-8.5 * dt));
             vel = 0;
           }
-        } else if (Math.abs(vel) > 0.01) {
-          rotY += vel * f;
-          vel *= 0.94;
-        } else if (isPlaying && !isHovered) {
-          rotY += degPerSec * f;
+        } else if (Math.abs(vel) > 0.05) {
+          rotY += vel * dt;
+          vel *= Math.exp(-4.2 * dt);
+          if (Math.abs(vel) <= 0.05) vel = 0;
+        } else {
+          // Auto-rotation with exponential hover ease (smooth glide-to-stop & restart)
+          const targetHover = (isPlaying && !isHovered) ? 1.0 : 0.0;
+          hoverEase += (targetHover - hoverEase) * (1 - Math.exp(-6.5 * dt));
+
+          if (hoverEase > 0.001) {
+            rotY += degPerSec * hoverEase * dt;
+          }
         }
+
+        applyTransform();
       }
-      applyTransform();
 
       if (typeof window.requestAnimationFrame === 'function') {
         window.requestAnimationFrame(draw);
@@ -1578,10 +1601,13 @@
         return;
       }
       try { scene.setPointerCapture?.(e.pointerId); } catch (_) {}
+      scene.classList.add('is-dragging');
       dragState.active = true;
       dragState.startX = e.clientX;
       dragState.lastX = e.clientX;
+      dragState.lastTime = performance.now();
       dragState.moved = 0;
+      dragState.recentVel = 0;
       targetRotY = null;
       vel = 0;
     });
@@ -1589,23 +1615,29 @@
     scene.addEventListener('pointermove', (e) => {
       if (!dragState.active) return;
       const dx = e.clientX - dragState.lastX;
+      const now = performance.now();
+      const dtMove = Math.max((now - dragState.lastTime) / 1000, 0.001);
       dragState.lastX = e.clientX;
+      dragState.lastTime = now;
       dragState.moved += Math.abs(dx);
-      const k = 0.3 * sensitivity;
+
+      const k = 0.28 * sensitivity;
       rotY += dx * k;
-      vel = dx * k * 60;
-      applyTransform();
+
+      const instVel = (dx * k) / dtMove;
+      dragState.recentVel = dragState.recentVel * 0.35 + instVel * 0.65;
     });
 
     const endDrag = (e) => {
       if (dragState.active) {
         try { scene.releasePointerCapture?.(e.pointerId); } catch (_) {}
+        scene.classList.remove('is-dragging');
         dragState.active = false;
+        vel = clampN(dragState.recentVel, -450, 450);
       }
     };
     scene.addEventListener('pointerup', endDrag);
     scene.addEventListener('pointercancel', endDrag);
-    scene.addEventListener('pointerenter', () => { isHovered = true; }, { passive: true });
     scene.addEventListener('pointerleave', () => { isHovered = false; }, { passive: true });
 
     if (prevBtn) {

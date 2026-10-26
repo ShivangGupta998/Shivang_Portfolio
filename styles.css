@@ -381,18 +381,36 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .carousel-play-btn { font-size: 11px; letter-spacing: -1px; width: 36px; }
 .carousel-play-btn.is-paused { background: rgba(255, 95, 0, 0.22); border-color: rgba(255, 95, 0, 0.6); color: #ff8139; }
 
-.round-carousel-container { position: relative; width: 100%; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; border-radius: 20px; background: radial-gradient(ellipse at 50% 60%, rgba(255, 95, 0, 0.08) 0%, rgba(18, 18, 20, 0.6) 45%, rgba(6, 6, 8, 0.95) 100%); border: 1px solid rgba(255, 255, 255, 0.09); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 28px 70px rgba(0, 0, 0, 0.5); padding: 46px 0 26px; user-select: none; -webkit-user-select: none; margin-top: 14px; -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); outline: none; }
+.round-carousel-container { position: relative; width: 100%; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; border-radius: 20px; background: radial-gradient(ellipse at 50% 60%, rgba(255, 95, 0, 0.08) 0%, rgba(18, 18, 20, 0.6) 45%, rgba(6, 6, 8, 0.95) 100%); border: 1px solid rgba(255, 255, 255, 0.09); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 28px 70px rgba(0, 0, 0, 0.5); padding: 46px 0 26px; user-select: none; -webkit-user-select: none; margin-top: 14px; outline: none; }
+.round-carousel-container::before,
+.round-carousel-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 140px;
+  pointer-events: none;
+  z-index: 25;
+}
+.round-carousel-container::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(6, 6, 8, 0.96) 0%, rgba(6, 6, 8, 0.75) 35%, transparent 100%);
+}
+.round-carousel-container::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(6, 6, 8, 0.96) 0%, rgba(6, 6, 8, 0.75) 35%, transparent 100%);
+}
 .round-carousel-container:focus-visible { border-color: rgba(255, 95, 0, 0.7); }
-.round-carousel-scene { position: relative; width: 100%; height: 600px; display: flex; align-items: center; justify-content: center; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; perspective: 3200px; cursor: grab; touch-action: none; }
+.round-carousel-scene { position: relative; width: 100%; height: 600px; display: flex; align-items: center; justify-content: center; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; perspective: 3200px; cursor: grab; touch-action: none; will-change: transform; }
 .round-carousel-scene.is-dragging { cursor: grabbing; }
 
-.round-carousel-tilt { position: relative; display: flex; align-items: center; justify-content: center; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; transform: rotateX(-7deg); will-change: transform; transition: transform 0.25s ease-out; }
-.round-carousel-ring { position: relative; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; will-change: transform; }
+.round-carousel-tilt { position: relative; display: flex; align-items: center; justify-content: center; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; transform: rotateX(-7deg); will-change: transform; }
+.round-carousel-ring { position: relative; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; will-change: transform; transform: translate3d(0, 0, 0); }
 
-.round-carousel-item { position: absolute; inset: 0; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; will-change: transform; }
+.round-carousel-item { position: absolute; inset: 0; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; will-change: transform; contain: layout style; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
 .carousel-face { position: absolute; inset: 0; border-radius: 30px; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
 
-.carousel-face-front { display: flex; flex-direction: column; padding: 28px 24px; background: rgba(18, 18, 22, 0.88); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.12); box-shadow: 0 14px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08); transition: border-color .28s ease, box-shadow .28s ease; }
+.carousel-face-front { display: flex; flex-direction: column; padding: 28px 24px; background: linear-gradient(165deg, rgba(22, 22, 28, 0.96) 0%, rgba(12, 12, 15, 0.98) 100%); border: 1px solid rgba(255, 255, 255, 0.13); box-shadow: 0 16px 44px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.09); transition: border-color .28s ease, box-shadow .28s ease; contain: layout style; }
 .carousel-face-front:hover { border-color: rgba(255, 95, 0, 0.65); box-shadow: 0 20px 50px rgba(255, 95, 0, 0.16), 0 0 28px rgba(255, 95, 0, 0.2); }
 
 .carousel-face-back { transform: rotateY(180deg); background: linear-gradient(145deg, #18181c, #0d0d10); border: 1px solid rgba(255, 255, 255, 0.08); filter: brightness(0.6); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: #ff9d66; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35); }
