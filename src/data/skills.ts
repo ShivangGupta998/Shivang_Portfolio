@@ -98,5 +98,5 @@ export const SKILLS_CATEGORIES = [
 ];
 
 if (typeof window !== "undefined") {
-  window.SKILLS_CATEGORIES = SKILLS_CATEGORIES;
+  (window as any).SKILLS_CATEGORIES = SKILLS_CATEGORIES;
 }

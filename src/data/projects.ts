@@ -172,5 +172,5 @@ export const PROJECTS_DATA = [
 ];
 
 if (typeof window !== "undefined") {
-  window.PROJECTS_DATA = PROJECTS_DATA;
+  (window as any).PROJECTS_DATA = PROJECTS_DATA;
 }

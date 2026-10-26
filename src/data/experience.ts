@@ -62,5 +62,5 @@ export const EXPERIENCE_DATA = [
 ];
 
 if (typeof window !== "undefined") {
-  window.EXPERIENCE_DATA = EXPERIENCE_DATA;
+  (window as any).EXPERIENCE_DATA = EXPERIENCE_DATA;
 }

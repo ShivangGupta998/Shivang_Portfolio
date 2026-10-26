@@ -182,5 +182,5 @@ export const CERTIFICATIONS_DATA = [
 ];
 
 if (typeof window !== "undefined") {
-  window.CERTIFICATIONS_DATA = CERTIFICATIONS_DATA;
+  (window as any).CERTIFICATIONS_DATA = CERTIFICATIONS_DATA;
 }

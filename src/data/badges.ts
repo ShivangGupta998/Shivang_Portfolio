@@ -342,8 +342,8 @@ const BADGES_DATA = [
 ];
 
 if (typeof window !== "undefined") {
-  window.BADGES_DATA = BADGES_DATA;
+  (window as any).BADGES_DATA = BADGES_DATA;
 }
-if (typeof module !== "undefined" && module.exports) {
-  module.exports = { BADGES_DATA };
+if (typeof (globalThis as any).module !== "undefined" && (globalThis as any).module.exports) {
+  (globalThis as any).module.exports = { BADGES_DATA };
 }
