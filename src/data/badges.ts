@@ -6,6 +6,106 @@
 
 const BADGES_DATA = [
   {
+    "id": "0961b0c3-cf85-494f-8187-0c5f4ec34ae3",
+    "name": "Terraform Practitioner Advanced",
+    "issuer": "IBM",
+    "image": "https://images.credly.com/images/a1220a3c-2a09-45ce-9c3c-7bcfbaf117ce/Terraform_20Practitioner_20Advanced_20Tech_20Sales.png",
+    "localImage": "assets/credentials/ibm-terraform-practitioner-advanced-badge.png",
+    "issueDate": "October 2026",
+    "issuedAtDate": "2026-10-25",
+    "credentialUrl": "https://www.credly.com/badges/0961b0c3-cf85-494f-8187-0c5f4ec34ae3",
+    "description": "The badge earner has demonstrated both advanced knowledge and skill with Terraform by successfully completing the required learning and showing the ability to deploy the product for a client, including planning, deployment, and basic administration of Terraform. The badge earner has also learned how to prepare and execute pre-sales client engagements, which may include workshops, pilots, or proof-of-experience (PoX) activities.",
+    "skills": [
+      "Cloud Engineer",
+      "Infrastructure As Code",
+      "Multi-Cloud",
+      "PWID-B1033100",
+      "Sales",
+      "Sales Cloud",
+      "Technology Sales",
+      "Terraform CLI",
+      "Terraform Configuration",
+      "Terraform Purpose",
+      "Terraform State",
+      "Trusted Advisor"
+    ]
+  },
+  {
+    "id": "37832f4f-183d-4e36-a122-cf7f9b57a221",
+    "name": "Verify Practitioner Advanced",
+    "issuer": "IBM",
+    "image": "https://images.credly.com/images/e5af8262-8dfe-4592-afed-3e691fbdd61d/Verify_20Practitioner_20Advance.png",
+    "localImage": "assets/credentials/ibm-verify-practitioner-advanced-badge.png",
+    "issueDate": "October 2026",
+    "issuedAtDate": "2026-10-21",
+    "credentialUrl": "https://www.credly.com/badges/37832f4f-183d-4e36-a122-cf7f9b57a221",
+    "description": "The badge earner has demonstrated both advanced knowledge and skill with IBM Verify by successfully completing required learning, and the ability to successfully deploy the product at a client which includes planning, installation, and deployment of IBM Verify. The successful deployment demonstrates that the badge earner can effectively deliver the value clients are looking for from this technology.",
+    "skills": [
+      "App Migration",
+      "App Modernization",
+      "Branding",
+      "Deploy",
+      "IBM Technical Sales",
+      "IBM Verify",
+      "Orchestration",
+      "PWID-B0982400",
+      "PoX",
+      "SaaS",
+      "Sales",
+      "Sales - Cloud",
+      "Technology Sales",
+      "Trusted Advisor"
+    ]
+  },
+  {
+    "id": "d19c70c3-3123-4fe9-ac01-9fe66c631135",
+    "name": "API Connect Sales Foundation",
+    "issuer": "IBM",
+    "image": "https://images.credly.com/images/847935d3-b501-4d3f-a326-e033d6ec033c/API_20Connect_20Sales_20Foundation.png",
+    "localImage": "assets/credentials/ibm-api-connect-sales-foundation-badge.png",
+    "issueDate": "October 2026",
+    "issuedAtDate": "2026-10-20",
+    "credentialUrl": "https://www.credly.com/badges/d19c70c3-3123-4fe9-ac01-9fe66c631135",
+    "description": "This badge earner has learned how to position and sell API Connect. They gained knowledge about how to have customer conversations that reveal common integration business challenges and how to position API Connect to solve common pain points. The earner also knows how to beat the competition and deliver business outcomes clients need as they embark or continue in their application integration journey.",
+    "skills": [
+      "API Connect",
+      "API Lifecycle Management",
+      "Application Integration",
+      "Cloud Pak For Integration",
+      "PWID-B1011600",
+      "Sales",
+      "Sales-Cloud",
+      "Technology Sales",
+      "Trusted Advisor"
+    ]
+  },
+  {
+    "id": "27a65e03-e4e1-4b42-992a-9934747dbca1",
+    "name": "Vault Practitioner Advanced",
+    "issuer": "IBM",
+    "image": "https://images.credly.com/images/2c42a526-294b-4edc-9fca-e66ca217703b/Vault_20Practitioner_20Advanced.png",
+    "localImage": "assets/credentials/ibm-vault-practitioner-advanced-badge.png",
+    "issueDate": "October 2026",
+    "issuedAtDate": "2026-10-18",
+    "credentialUrl": "https://www.credly.com/badges/27a65e03-e4e1-4b42-992a-9934747dbca1",
+    "description": "The badge earner has demonstrated both advanced knowledge and skill with Vault by successfully completing required learning and demonstrating the ability to successfully deploy the product at a client, which includes planning, deployment, and basic administration of Vault. The badge earner has also learned how to prepare and execute pre-sales client engagements which could include workshops, pilots, or proof of experiences (PoX) activities.",
+    "skills": [
+      "Authentication Methods",
+      "Cloud Engineer",
+      "Encryption As A Service",
+      "PWID-B1032200",
+      "Sales",
+      "Sales Cloud",
+      "Secrets Management",
+      "Security Automation",
+      "Technology Sales",
+      "Trusted Advisor",
+      "Vault Architecture",
+      "Vault Tokens",
+      "Vault UI"
+    ]
+  },
+  {
     "id": "9d544585-bee2-43a2-b8f4-925aa75b5ea8",
     "name": "Verify Sales Foundation",
     "issuer": "IBM",
@@ -16,31 +116,39 @@ const BADGES_DATA = [
     "credentialUrl": "https://www.credly.com/badges/9d544585-bee2-43a2-b8f4-925aa75b5ea8",
     "description": "The badge earner understands the identity and access security market opportunity and the challenges customers face as they progress through digital transformation. They can describe how Verify (SaaS) can bring value to clients, solve business needs in their AI/Cloud journey, the Consumer Identity and Workforce Identity landscape, the challenges in the market, what Verify (SaaS) is, and how it can play a vital role in helping clients to solve business challenges.",
     "skills": [
-      "IBM Verify",
-      "Identity and Access Management",
-      "IAM",
-      "Cloud Security",
-      "SaaS Security",
-      "Technology Sales",
-      "Trusted Advisor"
+      "Consumer Identity And Access Management",
+      "PWID-B0631800",
+      "Sales Cycle Execution",
+      "Sales Opportunity Identification",
+      "Security Strategy",
+      "Zero Trust Strategy"
     ]
   },
   {
     "id": "58d40841-8b81-41b2-a74a-5e80e7c7ff31",
     "name": "Guardium Data Security Center Sales Foundation",
     "issuer": "IBM",
-    "image": "https://images.credly.com/images/7181f77c-a9c6-4f94-b375-91075d305d94/twitter_thumb_201604_Guardium_20Data_20Security_20Center_20Sales_20Foundation.png",
+    "image": "https://images.credly.com/images/7181f77c-a9c6-4f94-b375-91075d305d94/Guardium_20Data_20Security_20Center_20Sales_20Foundation.png",
     "localImage": "assets/credentials/ibm-guardium-sales-foundation-badge.png",
     "issueDate": "October 2026",
     "issuedAtDate": "2026-10-07",
     "credentialUrl": "https://www.credly.com/badges/58d40841-8b81-41b2-a74a-5e80e7c7ff31",
     "description": "The badge earner can describe how IBM Guardium Data Security Center can bring value to clients across on-premise and cloud environments. They will be able to engage clients and prospects in a conversation about what's happening in the market, the challenges clients face, and how Guardium Data Security Center can play a vital and differentiating role in solving their data security challenges.",
     "skills": [
-      "IBM Guardium",
-      "Data Security",
-      "Data Protection",
-      "Compliance & Auditing",
+      "AI Security",
+      "Compliance",
+      "DDR",
       "DSPM",
+      "Data Detection and Response",
+      "Data Security",
+      "Data Security Posture Management",
+      "Guardium",
+      "Guardium Data Security Center",
+      "PWID-B0993400",
+      "Quantum Safe",
+      "Sales",
+      "Sales Cloud",
+      "Security",
       "Technology Sales",
       "Trusted Advisor"
     ]
@@ -174,7 +282,7 @@ const BADGES_DATA = [
       "Observability",
       "PWID-B0023100",
       "Sales",
-      "Sales \u2013Cloud",
+      "Sales –Cloud",
       "Technology Sales",
       "Trusted Advisor"
     ]
@@ -187,13 +295,13 @@ const BADGES_DATA = [
     "issueDate": "September 2026",
     "issuedAtDate": "2026-09-02",
     "credentialUrl": "https://www.credly.com/badges/6d50126a-657c-4a3f-8af0-79f0951e8c76",
-    "description": "The badge earner has learned what is Observability and how it is a game changer for microservices, cloud, and APM (Application Performance Monitoring). They understand the differences between Monitoring and Observability, and can articulate the value propositions of Instana as well as Instana\u2019s unique differentiators. They can act as a trusted client advisor explaining how Instana delivers measurable business outcomes and drives business value.",
+    "description": "The badge earner has learned what is Observability and how it is a game changer for microservices, cloud, and APM (Application Performance Monitoring). They understand the differences between Monitoring and Observability, and can articulate the value propositions of Instana as well as Instana’s unique differentiators. They can act as a trusted client advisor explaining how Instana delivers measurable business outcomes and drives business value.",
     "skills": [
       "Instana",
       "Observability",
       "PWID-B0022100",
       "Sales",
-      "Sales \u2013 Cloud",
+      "Sales – Cloud",
       "Technology Sales",
       "Trusted Advisor"
     ]

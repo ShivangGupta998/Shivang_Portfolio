@@ -7,10 +7,12 @@ A standalone portfolio built with HTML, CSS, and vanilla JavaScript. It has no f
 Open `index.html` directly in a browser, or serve the project root:
 
 ```powershell
+node server.js
+# or
 python -m http.server 8000
 ```
 
-Then open http://localhost:8000.
+Then open http://localhost:3000 (or http://localhost:8000).
 
 ## Deploy
 

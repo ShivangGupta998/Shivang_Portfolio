@@ -330,7 +330,11 @@
     'WebSockets': { insight: 'Implemented native FastAPI WebSockets for real-time live notification broadcasting in DATAEKO IT Service Desk.', filter: 'ai' },
     'Slack SDK': { insight: 'Automated ticket alerts and IT incident notifications via Slack Bot integration in DATAEKO IT Service Desk.', filter: 'devops' },
     'AWS CodeBuild': { insight: 'Configured automated CI pipeline stages for dependency installation, testing, and production builds in AWS CodeBuild.', filter: 'devops' },
-    'Gemini AI': { insight: 'Integrated Google Gemini AI Copilot for context-aware IT ticket triage, troubleshooting, and navigation.', filter: 'ai' }
+    'Gemini AI': { insight: 'Integrated Google Gemini AI Copilot for context-aware IT ticket triage, troubleshooting, and navigation.', filter: 'ai' },
+    'Vault': { insight: 'Advanced secrets management, encryption as a service, dynamic credentials leasing, and zero-trust security automation with HashiCorp Vault.', filter: 'cloud' },
+    'ClickHouse': { insight: 'Real-time analytical columnar database, sub-second queries, and petabyte-scale data warehousing.', filter: 'cloud' },
+    'Observability': { insight: 'Full-stack telemetry with OpenTelemetry, Instana, and ClickHouse for metrics, logs, distributed tracing, and APM.', filter: 'devops' },
+    'API Connect': { insight: 'Enterprise API lifecycle management, secure gateway architecture, application integration, and hybrid-cloud connectivity.', filter: 'cloud' }
   };
 
   const TOPIC_TEMPLATES = {
@@ -975,6 +979,9 @@
     if (badgeStatCount) badgeStatCount.textContent = `${totalCount}+ Verified Credentials`;
     if (certsCount) certsCount.textContent = `${certs.length} Certifications`;
     if (badgesCount) badgesCount.textContent = `${badges.length} Verified Badges`;
+
+    const allPill = document.querySelector('.cert-filter-pill[data-filter="all"]');
+    if (allPill) allPill.textContent = `ALL (${certs.length})`;
 
     if (!certsGrid) return;
     certsGrid.innerHTML = '';
